@@ -17,8 +17,8 @@
 
 import pygame
 import sys
-import random
 from math import *
+import secrets
 
 pygame.init()
 
@@ -104,8 +104,8 @@ class Ball:
         self.x = width/2 - self.r/2
         self.y = height/2 -self.r/2
         self.color = color
-        self.angle = random.randint(-75, 75)
-        if random.randint(0, 1):
+        self.angle = secrets.SystemRandom().randint(-75, 75)
+        if secrets.SystemRandom().randint(0, 1):
             self.angle += 180
         
         self.speed = 8

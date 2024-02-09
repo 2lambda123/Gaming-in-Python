@@ -17,7 +17,7 @@
 
 import pygame
 import sys
-import random
+import secrets
 
 pygame.init()
 
@@ -155,7 +155,7 @@ def generateGrid():
     for i in range(size):
         grid.append([])
         for j in range(size):
-            prob = random.randint(1, 100)
+            prob = secrets.SystemRandom().randint(1, 100)
             if prob < mineProb:
                 newObj = Spot((width/size)*(j), (height/size)*(i), width/size - 3, height/size - 3, True)
             else:
