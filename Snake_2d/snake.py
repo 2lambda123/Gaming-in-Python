@@ -45,6 +45,8 @@ snake_head = (247, 220, 111)
 
 class Snake:
     def __init__(self, x_start, y_start):
+        """"""
+        
         self.x = x_start
         self.y = y_start
         self.w = 10
@@ -55,6 +57,8 @@ class Snake:
         self.length = 1
 
     def reset(self):
+        """"""
+        
         self.x = width/2-scale
         self.y = height/2-scale
         self.w = 10
@@ -66,6 +70,8 @@ class Snake:
     
     #function to show the body of snake
     def show(self):
+        """"""
+        
         for i in range(self.length):
             if not i == 0:
                 pygame.draw.rect(display, snake_colour, (self.history[i][0], self.history[i][1], self.w, self.h))
@@ -74,14 +80,20 @@ class Snake:
 
 
     def check_eaten(self):
+        """"""
+        
         if abs(self.history[0][0] - food_x) < scale and abs(self.history[0][1] - food_y) < scale:
             return True
 
     def grow(self):
+        """"""
+        
         self.length += 1
         self.history.append(self.history[self.length-2])
 
     def death(self):
+        """"""
+        
         i = self.length - 1
         while i > 0:
             if abs(self.history[0][0] - self.history[i][0]) < self.w and abs(self.history[0][1] - self.history[i][1]) < self.h and self.length > 2:
@@ -89,6 +101,8 @@ class Snake:
             i -= 1
 
     def update(self):
+        """"""
+        
         i = self.length - 1
         while i > 0:
             self.history[i] = copy.deepcopy(self.history[i-1])
@@ -97,6 +111,8 @@ class Snake:
         self.history[0][1] += self.y_dir*scale
     
     def autoplay(self):
+        """"""
+        
 
         if abs(food_x-self.history[0][0]) < 10 and abs(food_y-self.history[0][1]) < 10:
             # if self.check_eaten():
@@ -174,15 +190,21 @@ class Snake:
 # ----------- Food Class --------------
 class Food:
     def new_location(self):
+        """"""
+        
         global food_x, food_y
         food_x = secrets.SystemRandom().randrange(1, width/scale-1)*scale
         food_y = secrets.SystemRandom().randrange(1, height/scale-1)*scale
 
     def show(self):
+        """"""
+        
         pygame.draw.rect(display, food_colour, (food_x, food_y, scale, scale))
 
 
 def show_score():
+    """"""
+    
     font = pygame.font.SysFont("Copperplate Gothic Bold", 20)
     text = font.render("Score: " + str(score), True, snake_colour)
     display.blit(text, (scale, scale))
@@ -190,6 +212,8 @@ def show_score():
 
 # ----------- Main Game Loop -------------
 def gameLoop():
+    """"""
+    
     loop = True
 
     global score

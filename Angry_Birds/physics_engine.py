@@ -32,6 +32,17 @@ ground = 50
 clock = pygame.time.Clock()
 
 def init(screen):
+    """.get_rect().height
+    "Initializes the game screen and sets the display and dimensions."
+    Parameters:
+        - screen (pygame.Surface): The game screen to be initialized.
+    Returns:
+        - None: Does not return any value.
+    Processing Logic:
+        - Sets the global variables for width and height.
+        - Subtracts the ground height from the screen height.
+        - Gets the dimensions of the game screen using pygame's get_rect() method."""
+    
     global width, height, display
     display = screen
     (width, height) = display.get_rect().size
@@ -39,10 +50,14 @@ def init(screen):
 
 class Vector:
     def __init__(self, magnitude=0, angle=radians(0)):
+        """"""
+        
         self.magnitude = magnitude
         self.angle = angle
 
 def add_vectors(vector1, vector2):
+    """"""
+    
     x = sin(vector1.angle)*vector1.magnitude + sin(vector2.angle)*vector2.magnitude
     y = cos(vector1.angle)*vector1.magnitude + cos(vector2.angle)*vector2.magnitude
 
@@ -59,6 +74,8 @@ block_elasticity = 0.7
 
 class Pig:
     def __init__(self, x, y, r, v=None, type="PIG", loaded = False, color=(255, 255, 255)):
+        """"""
+        
         self.x = x
         self.y = y
         self.r = r
@@ -88,6 +105,8 @@ class Pig:
         self.isDead = False
 
     def draw(self):
+        """"""
+        
         self.animate_count += 1
 
         if self.type == "BIRD" and not self.loaded:
@@ -101,10 +120,14 @@ class Pig:
 
 
     def dead(self):
+        """"""
+        
         self.isDead = True
         self.image = self.pig_dead
 
     def move(self):
+        """"""
+        
         self.velocity = add_vectors(self.velocity, gravity)
 
         self.x += self.velocity.magnitude*sin(self.velocity.angle)
@@ -136,11 +159,15 @@ class Pig:
 
 class Bird(Pig):
     def load(self, slingshot):
+        """"""
+        
         self.x = slingshot.x
         self.y = slingshot.y
         self.loaded = True
 
     def mouse_selected(self):
+        """"""
+        
         pos = pygame.mouse.get_pos()
         dx = pos[0] - self.x
         dy = pos[1] - self.y
@@ -151,6 +178,8 @@ class Bird(Pig):
         return False
 
     def reposition(self, slingshot, mouse_click):
+        """"""
+        
         pos = pygame.mouse.get_pos()
         if self.mouse_selected():
             self.x = pos[0]
@@ -164,9 +193,13 @@ class Bird(Pig):
             self.velocity.angle = pi/2 + atan2(dy, dx)
 
     def unload(self):
+        """"""
+        
         self.loaded = False
 
     def project_path(self):
+        """"""
+        
         if self.loaded:
             path = []
             ball = Pig(self.x, self.y, self.r, self.velocity, self.type)
@@ -181,6 +214,8 @@ class Bird(Pig):
 
 class Block:
     def __init__(self, x, y, r, v=None, color=( 120, 40, 31 ), colorBoundary = ( 28, 40, 51 )):
+        """"""
+        
         self.r = 50
         self.w = 100
         self.h = 100
@@ -207,22 +242,32 @@ class Block:
         self.isDestroyed = False
 
     def rotate(self, coord, angle, anchor=(0, 0)):
+        """"""
+        
         corr = 0
         return ((coord[0] - anchor[0])*cos(angle + radians(corr)) - (coord[1] - anchor[1])*sin(angle + radians(corr)),
                 (coord[0] - anchor[0])*sin(angle + radians(corr)) + (coord[1] - anchor[1])*cos(angle + radians(corr)))
 
     def translate(self, coord):
+        """"""
+        
         return [coord[0] + self.x, coord[1] + self.y]
 
     def draw(self):
+        """"""
+        
         pygame.transform.rotate(self.image, self.rotateAngle)
         display.blit(self.image, (self.x - self.w/2, self.y))
 
     def destroy(self):
+        """"""
+        
         self.isDestroyed = True
         self.image = self.block_destroyed_image
 
     def move(self):
+        """"""
+        
         self.velocity = add_vectors(self.velocity, gravity)
 
         self.x += self.velocity.magnitude*sin(self.velocity.angle)
@@ -255,6 +300,8 @@ class Block:
 
 class Slingshot:
     def __init__(self, x, y, w, h, color=( 66, 73, 73 )):
+        """"""
+        
         self.x = x
         self.y = y
         self.w = w
@@ -262,6 +309,8 @@ class Slingshot:
         self.color = color
 
     def rotate(self, coord, angle, anchor=(0, 0)):
+        """"""
+        
         corr = 0
         return ((coord[0] - anchor[0])*cos(angle + radians(corr)) - (coord[1] - anchor[1])*sin(angle + radians(corr)),
                 (coord[0] - anchor[0])*sin(angle + radians(corr)) + (coord[1] - anchor[1])*cos(angle + radians(corr)))

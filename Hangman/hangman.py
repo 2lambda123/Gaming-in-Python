@@ -2,6 +2,8 @@ import secrets
 
 
 def game():
+    """"""
+    
     print_opening_message()
     secret_word = upload_secret_word()
 
@@ -34,6 +36,8 @@ def game():
 
 
 def draw_hang(failure):
+    """"""
+    
     print("  _______     ")
     print(" |/      |    ")
 
@@ -86,6 +90,8 @@ def draw_hang(failure):
 
 
 def prints_winner_message():
+    """"""
+    
     print("Congratulations, you win!")
     print("       ___________       ")
     print("      '._==_==_=_.'      ")
@@ -100,6 +106,8 @@ def prints_winner_message():
 
 
 def prints_loser_message(secret_word):
+    """"""
+    
     print("Failed, you were hanged!")
     print("The word was {}".format(secret_word))
     print("    _______________         ")
@@ -120,6 +128,8 @@ def prints_loser_message(secret_word):
     print("       \_______/           ")
 
 def correct_guess_mark(guess, correct_letters, secret_word):
+    """"""
+    
     index = 0
     for word in secret_word:
         if (guess == word):
@@ -127,19 +137,27 @@ def correct_guess_mark(guess, correct_letters, secret_word):
         index += 1
 
 def ask_guess():
+    """"""
+    
     guess = input("Which letter? ")
     guess = guess.strip().upper()
     return guess
 
 def initializes_correct_letters(word):
+    """"""
+    
     return ["_" for word in word]
 
 def print_opening_message():
+    """"""
+    
     print("*********************************")
     print("**Welcome to the Hangman game!***")
     print("*********************************")
 
 def upload_secret_word():
+    """"""
+    
     archive = open("list.txt", "r")
     word = []
 
