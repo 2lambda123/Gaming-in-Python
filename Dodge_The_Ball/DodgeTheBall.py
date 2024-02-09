@@ -45,6 +45,18 @@ score = 0
 
 class Ball:
     def __init__(self, radius, speed):
+        """"Initializes a circle object with given radius and speed parameters."
+        Parameters:
+            - radius (int): The radius of the circle.
+            - speed (int): The speed at which the circle moves.
+        Returns:
+            - None: This function does not return anything.
+        Processing Logic:
+            - Sets the initial x and y coordinates to 0.
+            - Sets the color of the circle to 0.
+            - Sets the angle of the circle to 0.
+            - The circle's speed is determined by the speed parameter."""
+        
         self.x = 0
         self.y = 0
         self.r = radius
@@ -53,12 +65,16 @@ class Ball:
         self.angle = 0
     
     def createBall(self):
+        """"""
+        
         self.x = width/2 - self.r
         self.y = height/2 - self.r
         self.color = secrets.SystemRandom().choice(colors)
         self.angle = secrets.SystemRandom().randint(-180, 180)
     
     def move(self):
+        """"""
+        
         self.x += self.speed*cos(radians(self.angle))
         self.y += self.speed*sin(radians(self.angle))
 
@@ -68,9 +84,13 @@ class Ball:
             self.angle *= -1
 
     def draw(self):
+        """"""
+        
         pygame.draw.ellipse(display, self.color, (self.x - self.r, self.y - self.r, self.r*2, self.r*2))
 
     def collision(self, radius):
+        """"""
+        
         pos = pygame.mouse.get_pos()
 
         dist = ((pos[0] - self.x)**2 + (pos[1] - self.y)**2)**0.5
@@ -80,22 +100,30 @@ class Ball:
 
 class Target:
     def __init__(self):
+        """"""
+        
         self.x = 0
         self.y = 0
         self.w = 20
         self.h = self.w
 
     def generateNewCoord(self):
+        """"""
+        
         self.x = secrets.SystemRandom().randint(self.w, width - self.w)
         self.y = secrets.SystemRandom().randint(self.h, height - self.h)
 
     def draw(self):
+        """"""
+        
         color = secrets.SystemRandom().choice(colors)
 
         pygame.draw.rect(display, color, (self.x, self.y, self.w, self.h))
 
     
 def gameOver():
+    """"""
+    
     loop = True
 
     font = pygame.font.SysFont("Agency FB", 100)
@@ -121,6 +149,8 @@ def gameOver():
 
 
 def checkCollision(target, d, objTarget):
+    """"""
+    
     pos = pygame.mouse.get_pos()
     dist = ((pos[0] - target[0] - objTarget.w)**2 + (pos[1] - target[1]  - objTarget.h)**2)**0.5
 
@@ -130,20 +160,28 @@ def checkCollision(target, d, objTarget):
 
 
 def drawPlayerPointer(pos, r):
+    """"""
+    
     pygame.draw.ellipse(display, playerColor, (pos[0] - r, pos[1] - r, 2*r, 2*r))
 
 
 def close():
+    """"""
+    
     pygame.quit()
     sys.exit()
 
 def displayScore():
+    """"""
+    
     font = pygame.font.SysFont("Forte", 30)
     scoreText = font.render("Score: " + str(score), True, (230, 230, 230))
     display.blit(scoreText, (10, 10))
 
 
 def gameLoop():
+    """"""
+    
     global score
     score = 0
     

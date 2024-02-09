@@ -47,6 +47,8 @@ font = pygame.font.SysFont("Times New Roman", 35)
 # Property of Each Cell on Grid
 class Spot:
     def __init__(self, x, y, w, h, mineState):
+        """"""
+        
         self.x = x
         self.y = y
         self.w = w
@@ -57,6 +59,8 @@ class Spot:
 
     # Draw Cells
     def draw(self):
+        """"""
+        
         if not self.reveal:
             pygame.draw.rect(display, white, (self.x, self.y, self.w, self.h))
         else:
@@ -72,6 +76,8 @@ class Spot:
 
     # Check if the Cell is a Mine and reveal others if Block has no Mine Surrounding
     def checkForMine(self, i, j):
+        """"""
+        
         global revealedSpots
         self.reveal = True
         revealedSpots += 1
@@ -121,6 +127,8 @@ class Spot:
 
     # Count Neighboring Mines
     def countNeighborMines(self, i, j):
+        """"""
+        
         if not self.isMine:
             if i > 0:
                 if grid[i-1][j].isMine:
@@ -150,6 +158,8 @@ class Spot:
 
 # Initialize the Grid             
 def generateGrid():
+    """"""
+    
     global grid, safeSpots
     grid = []
     for i in range(size):
@@ -170,6 +180,8 @@ def generateGrid():
 
 # Check if Grid is solved
 def gameWon():
+    """"""
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -188,6 +200,8 @@ def gameWon():
 
 # Check if Game is Lost        
 def gameLost():
+    """"""
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -206,21 +220,29 @@ def gameLost():
 
 # Draw the Grid
 def drawGrid():
+    """"""
+    
     for i in range(size):
         for j in range(size):
             grid[i][j].draw()
 
 # Reset the Grid
 def reset():
+    """"""
+    
     minesweeper()
 
 # Close the Game
 def close():
+    """"""
+    
     pygame.quit()
     sys.exit()
 
 # The Game
 def minesweeper():
+    """"""
+    
     loop = True
 
     generateGrid()

@@ -50,6 +50,8 @@ largeFont = pygame.font.SysFont("Small Fonts", 60)
 
 # Draw the Boundary of Board
 def boundary():
+    """"""
+    
     global top, bottom, left, right
     pygame.draw.rect(display, left, (0, 0, margin, height))
     pygame.draw.rect(display, top, (0, 0, width, margin))
@@ -70,6 +72,8 @@ def boundary():
 # Paddle Class 
 class Paddle:
     def __init__(self, position):
+        """"""
+        
         self.w = 10
         self.h = self.w*8
         self.paddleSpeed = 6
@@ -83,10 +87,14 @@ class Paddle:
 
     # Show the Paddle
     def show(self):
+        """"""
+        
         pygame.draw.rect(display, white, (self.x, self.y, self.w, self.h))
 
     # Move the Paddle
     def move(self, ydir):
+        """"""
+        
         self.y += self.paddleSpeed*ydir
         if self.y < 0:
             self.y -= self.paddleSpeed*ydir
@@ -100,6 +108,8 @@ rightPaddle = Paddle(1)
 # Ball Class
 class Ball:
     def __init__(self, color):
+        """"""
+        
         self.r = 20
         self.x = width/2 - self.r/2
         self.y = height/2 -self.r/2
@@ -112,10 +122,14 @@ class Ball:
 
     # Show the Ball
     def show(self):
+        """"""
+        
         pygame.draw.ellipse(display, self.color, (self.x, self.y, self.r, self.r))
 
     # Move the Ball
     def move(self):
+        """"""
+        
         global scoreLeft, scoreRight
         self.x += self.speed*cos(radians(self.angle))
         self.y += self.speed*sin(radians(self.angle))
@@ -132,6 +146,8 @@ class Ball:
 
     # Check and Reflect the Ball when it hits the padddle
     def checkForPaddle(self):
+        """"""
+        
         if self.x < width/2:
             if leftPaddle.x < self.x < leftPaddle.x + leftPaddle.w:
                 if leftPaddle.y < self.y < leftPaddle.y + 10 or leftPaddle.y < self.y + self.r< leftPaddle.y + 10:
@@ -171,6 +187,8 @@ class Ball:
 
 # Show the Score
 def showScore():
+    """"""
+    
     leftScoreText = font.render("Score : " + str(scoreLeft), True, red)
     rightScoreText = font.render("Score : " + str(scoreRight), True, blue)
 
@@ -179,6 +197,8 @@ def showScore():
 
 # Game Over
 def gameOver():
+    """"""
+    
     if scoreLeft == maxScore or scoreRight == maxScore:
         while True:
             for event in pygame.event.get():
@@ -198,6 +218,8 @@ def gameOver():
             pygame.display.update()
 
 def reset():
+    """"""
+    
     global scoreLeft, scoreRight
     scoreLeft = 0
     scoreRight = 0
@@ -205,10 +227,14 @@ def reset():
 
 
 def close():
+    """"""
+    
     pygame.quit()
     sys.exit()
 
 def board():
+    """"""
+    
     loop = True
     leftChange = 0
     rightChange = 0

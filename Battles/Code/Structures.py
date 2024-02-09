@@ -34,6 +34,8 @@ margin = 0
 clock = pygame.time.Clock()
 
 def initStruct(screen, size, border=0):
+    """"""
+    
     global display, width, height, margin
     display = screen
     width = size[0]
@@ -41,6 +43,8 @@ def initStruct(screen, size, border=0):
     margin = border
 
 def getCoordPoly(x, y, r, n, rotate=0, anchor=(0, 0)):
+    """"""
+    
     coords = []
     for i in range(n):
         coords.append([x - anchor[0] + r*cos(2*pi*i/n + rotate), y - anchor[1] + r*sin(2*pi*i/n + rotate)])
@@ -49,6 +53,8 @@ def getCoordPoly(x, y, r, n, rotate=0, anchor=(0, 0)):
 
 class Shots:
     def __init__(self, x, y, r1, speed, angle, color=(0, 0, 0), type="circle", r2=0):
+        """"""
+        
         self.x = x
         self.y = y
         self.r1 = r1
@@ -64,6 +70,8 @@ class Shots:
         self.color = color
         
     def draw(self):
+        """"""
+        
         if self.type == "circle":
             pygame.draw.ellipse(display, self.color, (self.x - self.r1, self.y - self.r2, self.r1*2, self.r2*2))
         elif self.type == "line":
@@ -72,11 +80,15 @@ class Shots:
             pygame.draw.line(display, self.color, (self.x, self.y), (x2, y2), 2)
             
     def move(self):
+        """"""
+        
         self.x += self.speed*cos(self.angle)
         self.y += self.speed*sin(self.angle)
 
 class Cannon:
     def __init__(self, x, y, w, h, size, range, baseR, level, radius, speed, colorBarrel=(0, 0, 0), colorHead=(0, 0, 0), colorBase=(255, 255, 255)):
+        """"""
+        
         self.x = x
         self.y = y
 
@@ -141,6 +153,8 @@ class Cannon:
         self.font = pygame.font.SysFont("Agency FB", 20)
 
     def updateHealth(self, troops):
+        """"""
+        
         error = self.baseR
         for troop in troops:
             if (abs(troop.nearestPos[0] - self.x) < error)  and (abs(troop.nearestPos[1] - self.y) < error):
@@ -149,6 +163,8 @@ class Cannon:
                         self.health -= troop.damage
 
     def isHit(self, coord):
+        """"""
+        
         error = self.baseR
         dist = ((self.nearestPos[0] - coord[0])**2 + (self.nearestPos[1] - coord[1])**2)**0.5
         if dist < error:
@@ -156,6 +172,8 @@ class Cannon:
         return False
 
     def removeHit(self):
+        """"""
+        
         tempList = self.shots[:]
         for shot in self.shots:
             if self.isHit((shot.x, shot.y)):
@@ -164,14 +182,20 @@ class Cannon:
         self.shots = tempList[:]
                         
     def rotate(self, coord, angle, anchor=(0, 0)):
+        """"""
+        
         corr = 270
         return ((coord[0] - anchor[0])*cos(angle + radians(corr)) - (coord[1] - anchor[1])*sin(angle + radians(corr)),
                 (coord[0] - anchor[0])*sin(angle + radians(corr)) + (coord[1] - anchor[1])*cos(angle + radians(corr)))
 
     def translate(self, coord):
+        """"""
+        
         return [coord[0] + self.x, coord[1] + self.y]
 
     def shoot(self):
+        """"""
+        
         error = 0.05
 
         if not ((abs(self.x - self.xOld) < error) and (abs(self.y - self.yOld) < error)):
@@ -203,6 +227,8 @@ class Cannon:
         self.shots = tempList[:]
 
     def draw(self, troops):
+        """"""
+        
         if len(troops):
             nearestPos = 0
             lowestDist = float("inf")
@@ -259,6 +285,8 @@ class Cannon:
    
 class Tower:
     def __init__(self, x, y, w, h, size, range, baseR, level, radius, speed, colorBarrel=(0, 0, 0), colorHead=(0, 0, 0), colorBase=(255, 0, 0)):
+        """"""
+        
         self.x = x
         self.y = y
 
@@ -322,6 +350,8 @@ class Tower:
         self.font = pygame.font.SysFont("Agency FB", 20)
 
     def updateHealth(self, troops):
+        """"""
+        
         error = self.r
         for troop in troops:
             if (abs(troop.nearestPos[0] - self.x) < error)  and (abs(troop.nearestPos[1] - self.y) < error):
@@ -330,6 +360,8 @@ class Tower:
                         self.health -= troop.damage
     
     def isHit(self, coord):
+        """"""
+        
         error = self.r
         dist = ((self.nearestPos[0] - coord[0])**2 + (self.nearestPos[1] - coord[1])**2)**0.5
         if dist < error:
@@ -337,6 +369,8 @@ class Tower:
         return False
 
     def removeHit(self):
+        """"""
+        
         tempList = self.shots[:]
         for shot in self.shots:
             if self.isHit((shot.x, shot.y)):
@@ -345,14 +379,20 @@ class Tower:
         self.shots = tempList[:]
                         
     def rotate(self, coord, angle, anchor=(0, 0)):
+        """"""
+        
         corr = 270
         return ((coord[0] - anchor[0])*cos(angle + radians(corr)) - (coord[1] - anchor[1])*sin(angle + radians(corr)),
                 (coord[0] - anchor[0])*sin(angle + radians(corr)) + (coord[1] - anchor[1])*cos(angle + radians(corr)))
 
     def translate(self, coord):
+        """"""
+        
         return [coord[0] + self.x, coord[1] + self.y]
 
     def shoot(self):
+        """"""
+        
         error = 0.1
 
         if not ((abs(self.x - self.xOld) < error) and (abs(self.y - self.yOld) < error)):

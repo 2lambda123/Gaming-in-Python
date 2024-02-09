@@ -52,6 +52,20 @@ font = pygame.font.SysFont("Snap ITC", 25)
 # Balloon Class
 class Balloon:
     def __init__(self, speed):
+        """Function: __init__
+        Parameters:
+            - speed (int): The speed of the object.
+        Returns:
+            - None: This function does not return anything.
+        Processing Logic:
+            - Generates random values for attributes.
+            - Uses secrets module for randomness.
+            - Sets initial angle to 90 degrees.
+            - Sets initial speed to negative value.
+            - Creates a probability pool for later use.
+            - Sets initial length to a random value.
+            - Sets initial color to a random choice from a list."""
+        
         self.a = secrets.SystemRandom().randint(30, 40)
         self.b = self.a + secrets.SystemRandom().randint(0, 10)
         self.x = secrets.SystemRandom().randrange(margin, width - self.a - margin)
@@ -64,6 +78,8 @@ class Balloon:
 
     # Move balloon around the Screen
     def move(self):
+        """"""
+        
         direct = secrets.SystemRandom().choice(self.probPool)
 
         if direct == -1:
@@ -86,12 +102,16 @@ class Balloon:
 
     # Show/Draw the balloon  
     def show(self):
+        """"""
+        
         pygame.draw.line(display, darkBlue, (self.x + self.a/2, self.y + self.b), (self.x + self.a/2, self.y + self.b + self.length))
         pygame.draw.ellipse(display, self.color, (self.x, self.y, self.a, self.b))
         pygame.draw.ellipse(display, self.color, (self.x + self.a/2 - 5, self.y + self.b - 3, 10, 10))
 
     # Check if Balloon is bursted
     def burst(self):
+        """"""
+        
         global score
         pos = pygame.mouse.get_pos()
 
@@ -101,6 +121,8 @@ class Balloon:
 
     # Reset the Balloon
     def reset(self):
+        """"""
+        
         self.a = secrets.SystemRandom().randint(30, 40)
         self.b = self.a + secrets.SystemRandom().randint(0, 10)
         self.x = secrets.SystemRandom().randrange(margin, width - self.a - margin)
@@ -118,6 +140,8 @@ for i in range(noBalloon):
     balloons.append(obj)
 
 def onBalloon(x, y, a, b, pos):
+    """"""
+    
     if (x < pos[0] < x + a) and (y < pos[1] < y + b):
         return True
     else:
@@ -125,6 +149,8 @@ def onBalloon(x, y, a, b, pos):
 
 # show the location of Mouse
 def pointer():
+    """"""
+    
     pos = pygame.mouse.get_pos()
     r = 25
     l = 20
@@ -139,18 +165,26 @@ def pointer():
     pygame.draw.line(display, color, (pos[0] - l/2, pos[1]), (pos[0] - l, pos[1]), 4)
 
 def lowerPlatform():
+    """"""
+    
     pygame.draw.rect(display, darkGray, (0, height - lowerBound, width, lowerBound))
 
 def showScore():
+    """"""
+    
     scoreText = font.render("Balloons Bursted : " + str(score), True, white)
     display.blit(scoreText, (150, height - lowerBound + 50))
 
 
 def close():
+    """"""
+    
     pygame.quit()
     sys.exit()
 
 def game():
+    """"""
+    
     global score
     loop = True
 
