@@ -17,8 +17,8 @@
 
 import pygame
 import sys
-import random
 from math import *
+import secrets
 
 pygame.init()
 
@@ -52,19 +52,19 @@ font = pygame.font.SysFont("Snap ITC", 25)
 # Balloon Class
 class Balloon:
     def __init__(self, speed):
-        self.a = random.randint(30, 40)
-        self.b = self.a + random.randint(0, 10)
-        self.x = random.randrange(margin, width - self.a - margin)
+        self.a = secrets.SystemRandom().randint(30, 40)
+        self.b = self.a + secrets.SystemRandom().randint(0, 10)
+        self.x = secrets.SystemRandom().randrange(margin, width - self.a - margin)
         self.y = height - lowerBound
         self.angle = 90
         self.speed = -speed
         self.probPool = [-1, -1, -1, 0, 0, 0, 0, 1, 1, 1]
-        self.length = random.randint(50, 100)
-        self.color = random.choice([red, green, purple, orange, yellow, blue])
+        self.length = secrets.SystemRandom().randint(50, 100)
+        self.color = secrets.SystemRandom().choice([red, green, purple, orange, yellow, blue])
 
     # Move balloon around the Screen
     def move(self):
-        direct = random.choice(self.probPool)
+        direct = secrets.SystemRandom().choice(self.probPool)
 
         if direct == -1:
             self.angle += -10
@@ -101,20 +101,20 @@ class Balloon:
 
     # Reset the Balloon
     def reset(self):
-        self.a = random.randint(30, 40)
-        self.b = self.a + random.randint(0, 10)
-        self.x = random.randrange(margin, width - self.a - margin)
+        self.a = secrets.SystemRandom().randint(30, 40)
+        self.b = self.a + secrets.SystemRandom().randint(0, 10)
+        self.x = secrets.SystemRandom().randrange(margin, width - self.a - margin)
         self.y = height - lowerBound 
         self.angle = 90
         self.speed -= 0.002
         self.probPool = [-1, -1, -1, 0, 0, 0, 0, 1, 1, 1]
-        self.length = random.randint(50, 100)
-        self.color = random.choice([red, green, purple, orange, yellow, blue])
+        self.length = secrets.SystemRandom().randint(50, 100)
+        self.color = secrets.SystemRandom().choice([red, green, purple, orange, yellow, blue])
 
 balloons = []
 noBalloon = 10
 for i in range(noBalloon):
-    obj = Balloon(random.choice([1, 1, 2, 2, 2, 2, 3, 3, 3, 4]))
+    obj = Balloon(secrets.SystemRandom().choice([1, 1, 2, 2, 2, 2, 3, 3, 3, 4]))
     balloons.append(obj)
 
 def onBalloon(x, y, a, b, pos):

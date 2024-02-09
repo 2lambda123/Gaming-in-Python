@@ -1,4 +1,4 @@
-import random
+import secrets
 
 
 def game():
@@ -149,7 +149,7 @@ def upload_secret_word():
 
     archive.close()
 
-    number = random.randrange(0, len(word))
+    number = secrets.SystemRandom().randrange(0, len(word))
     secret_word = word[number].upper()
     return secret_word
 

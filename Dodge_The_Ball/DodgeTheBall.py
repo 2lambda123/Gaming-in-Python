@@ -17,8 +17,8 @@
 
 import pygame
 import sys
-import random
 from math import *
+import secrets
 
 pygame.init()
 
@@ -55,8 +55,8 @@ class Ball:
     def createBall(self):
         self.x = width/2 - self.r
         self.y = height/2 - self.r
-        self.color = random.choice(colors)
-        self.angle = random.randint(-180, 180)
+        self.color = secrets.SystemRandom().choice(colors)
+        self.angle = secrets.SystemRandom().randint(-180, 180)
     
     def move(self):
         self.x += self.speed*cos(radians(self.angle))
@@ -86,11 +86,11 @@ class Target:
         self.h = self.w
 
     def generateNewCoord(self):
-        self.x = random.randint(self.w, width - self.w)
-        self.y = random.randint(self.h, height - self.h)
+        self.x = secrets.SystemRandom().randint(self.w, width - self.w)
+        self.y = secrets.SystemRandom().randint(self.h, height - self.h)
 
     def draw(self):
-        color = random.choice(colors)
+        color = secrets.SystemRandom().choice(colors)
 
         pygame.draw.rect(display, color, (self.x, self.y, self.w, self.h))
 

@@ -22,7 +22,7 @@ Lines - 717
 import pygame
 import sys
 from math import *
-import random
+import secrets
 
 pygame.init()
 
@@ -671,15 +671,15 @@ class Resource:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.r = random.randrange(20, 40)
+        self.r = secrets.SystemRandom().randrange(20, 40)
         self.type = "RESOURCE"
         colors = [gray, darkGray, yellow, red, orange, blue, green, violet]
-        self.color1 = random.choice(colors)
-        self.color2 = random.choice(colors)
+        self.color1 = secrets.SystemRandom().choice(colors)
+        self.color2 = secrets.SystemRandom().choice(colors)
 
-        self.sides = random.randrange(4, 10)
+        self.sides = secrets.SystemRandom().randrange(4, 10)
 
-        self.hitPoint = random.randrange(250, 700)
+        self.hitPoint = secrets.SystemRandom().randrange(250, 700)
         self.health = self.hitPoint
 
         self.font = pygame.font.SysFont("Agency FB", 20)

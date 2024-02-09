@@ -17,8 +17,8 @@
 import pygame
 import sys
 import copy
-import random
 import time
+import secrets
 
 pygame.init()
 
@@ -175,8 +175,8 @@ class Snake:
 class Food:
     def new_location(self):
         global food_x, food_y
-        food_x = random.randrange(1, width/scale-1)*scale
-        food_y = random.randrange(1, height/scale-1)*scale
+        food_x = secrets.SystemRandom().randrange(1, width/scale-1)*scale
+        food_y = secrets.SystemRandom().randrange(1, height/scale-1)*scale
 
     def show(self):
         pygame.draw.rect(display, food_colour, (food_x, food_y, scale, scale))

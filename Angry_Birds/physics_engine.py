@@ -22,7 +22,7 @@
 import pygame
 import sys
 from math import *
-import random
+import secrets
 
 pygame.init()
 width = None
@@ -75,7 +75,7 @@ class Pig:
         self.bird_image = pygame.image.load("Images/bird.png")
 
         if type == "PIG":
-            self.image = random.choice([self.pig1_image, self.pig2_image])
+            self.image = secrets.SystemRandom().choice([self.pig1_image, self.pig2_image])
         else:
             self.image = self.bird_image
 
@@ -95,7 +95,7 @@ class Pig:
                 pygame.draw.ellipse(display, self.color, (point[0], point[1], 3, 3), 1)
 
         if (self.type == "PIG") and (not self.animate_count%20) and (not self.isDead):
-            self.image = random.choice([self.pig1_image, self.pig2_image])
+            self.image = secrets.SystemRandom().choice([self.pig1_image, self.pig2_image])
 
         display.blit(self.image, (self.x - self.r, self.y - self.r))
 
